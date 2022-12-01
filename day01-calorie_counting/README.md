@@ -8,7 +8,11 @@ I dare say I could have used some advanced library but it seemed like overkill. 
 
 
 ## Part 2
-Now find the three biggest. Easy. `list.sort(reverse=True)[0:3]`
+Now find the three biggest. Easy:
+```
+list.sort(reverse=True)
+sum(list[0:3])
+```
 Of course, that didn't give me a big enough answer. Once I re-checked my input and re-ran it everything was fine.
 
 Mr Wastl doesn't make mistakes: you do.
