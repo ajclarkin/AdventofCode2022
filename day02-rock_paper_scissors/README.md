@@ -22,3 +22,14 @@ combo = {
     'CZ': (3 + 3)
 }
 ```
+
+The other thing I wanted to do was group the input with counts of values along the lines of:
+```sql
+    select
+    pair, count(pair)
+    from input
+    group by pair
+```
+
+Initially I thought about using pandas and of course over-complicated things. `collections.Counter()` counts the elements in a list and returns a dictionary. Perfect. Then they just needed to be lined up.
+
