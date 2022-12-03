@@ -11,6 +11,7 @@ character in the second. Only one character should appear on the other side so I
 I was tripped up because the duplicate might be present more than once on each side so I break out of the loop once found.
 
 *Better ways to do this*
+
 I could have used a list comprehension or a set. See alternative.py for example of using a list comp.
 
 
@@ -20,6 +21,7 @@ I used ASCII values for this.
 - a = 97, we want to correct to 1
 
 So, find the ASCII value and then convert it. If it's <97 then it's upper case otherwise lowercase:
+
 `total += (ord(c) - 38) if ord(c) < 97 else (ord(c) - 96)`
 
 
