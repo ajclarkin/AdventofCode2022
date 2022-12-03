@@ -11,8 +11,7 @@ character in the second. Only one character should appear on the other side so I
 I was tripped up because the duplicate might be present more than once on each side so I break out of the loop once found.
 
 *Better ways to do this*
-- I could have used a list comprehension
-- I could have used a set
+I could have used a list comprehension or a set. See alternative.py for example of using a list comp.
 
 
 Once we have found the character that appears in both sides we need to add it's value to the total.
