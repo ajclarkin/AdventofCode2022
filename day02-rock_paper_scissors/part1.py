@@ -2,7 +2,7 @@ from collections import Counter
 
 input = [x for x in open('input.txt').read().replace(' ', '').split('\n')]
 
-# COmbos are opponent and me
+# Combos are opponent and me
 # Lose = 0, draw = 3, win = 6 PLUS X = 1, Y = 2, Z = 3
 
 combo = {
