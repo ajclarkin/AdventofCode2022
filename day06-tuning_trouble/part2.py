@@ -8,6 +8,7 @@ input = open('input.txt').readline()
 pos = 14
 deq = deque(input[:14])
 
+# Added this in case the value was in the first set of characters
 if len(Counter(deq)) == 14:
     print('Value found immediately at 14')
 
