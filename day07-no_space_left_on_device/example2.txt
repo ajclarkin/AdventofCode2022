@@ -1,0 +1,13 @@
+$ cd a
+$ cd b
+$ cd c
+$ cd d
+$ cd ..
+$ cd e
+$ cd f
+$ cd ..
+$ cd g
+$ cd ..
+$ cd ..
+$ cd h
+$ cd ..
