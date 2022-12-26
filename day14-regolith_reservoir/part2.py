@@ -1,5 +1,5 @@
 # Day 14 - Regolith Reservoir, part 2
-# Now we need to add a floor and then work out when the sand nozzle (at 500,0) get blocked
+# Now we need to add a floor and then work out when the sand nozzle (at 500,0) get blocked                                                              
 
 
 class Cave:
@@ -80,10 +80,6 @@ class Cave:
             else:
                 # Cannot make a move
                 move = False
-
-            # if self.sand_y > self.y_max or self.sand_x < self.x_min or self.sand_x > self.x_max:
-            #     # Off the map
-            #     move = False
 
 
         self.sand.add((self.sand_x, self.sand_y))
