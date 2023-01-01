@@ -1,0 +1,79 @@
+# Day 15 - Beacon Exclusion Zone
+Part one was easy, part two was hard. I spent a long time thinking I didn't know how to solve part 2 and it took me a few days to work out how to solve it. Still, I got there.
+
+This uses Manhattan Distances to measure the distance from sensors to the nearest beacon.
+
+```python
+manhattan_distance = abs(start_x - end_x) + abs(start_y - end_y)
+
+```
+
+
+## Part 1
+Here we have to find the number of spaces on line 2000000 which cannot contain a beacon. So, that means count all the spaces detected by a sensor and not having a beacon already there.
+
+If the vertical distance from sensor to line <= the sensor range then it can fill spaces on the line. So, take the sensor distance minus the vertical distance and then fill in the remainder number of cells on either side of where the vertical line would join.
+
+
+## Part 2
+It's fairly obvious from the outset that this is going to be one of those challenges where brute force isn't going to work (although it looks like some users on Reddit did take that approach).
+
+Restrain the grid to 4,000,000 by 4,000,000. There is one cell that contains a beacon that is not detected by any sensor. Find it. When found multiple the x coordinate by 4e6 and add the y.
+
+We can't check every cell: there are 16,000,000,000,000 of them. If you think about the area represented by a sensor (as demonstrated by the example) you can see that they are all squares rotated by 45 degrees.
+
+
+```
+               1    1    2    2
+     0    5    0    5    0    5
+-2 ..........#.................
+-1 .........###................
+ 0 ....S...#####...............
+ 1 .......#######........S.....
+ 2 ......#########S............
+ 3 .....###########SB..........
+ 4 ....#############...........
+ 5 ...###############..........
+ 6 ..#################.........
+ 7 .#########S#######S#........
+ 8 ..#################.........
+ 9 ...###############..........
+10 ....B############...........
+11 ..S..###########............
+12 ......#########.............
+13 .......#######..............
+14 ........#####.S.......S.....
+15 B........###................
+16 ..........#SB...............
+17 ................S..........B
+18 ....S.......................
+19 ............................
+20 ............S......S........
+21 ............................
+22 .......................B....
+```
+
+I wondered if I could rotate these to make the geometry easier to work with but discounted that (because I didn't know how to do it).
+
+*Solution Rationale*
+
+- If there is only one cell not covered by a sensor then every adjacent cell will be covered by a sensor (or the edge of the grid.)
+- Even if in the corner of the grid it will be on the boundary of two sensors. Anywhere else it will bound more sensors.
+
+
+The means of finding the perimeter was pretty ugle but works - this is the `FindBoundary()` function. It keeps a note of the sensor coordinates c and r, and then the dc and dr to track the displacement from there. Start at 12 o'clock which is r minus (distance  + 1). Then work clockwise adjusting dc and dr accordingly. Then we put c and dc, r and dr together to get the actual coordinates.
+
+- 12 to 3 o'clock: increment row, increment column
+- 3 to 6 o'clock: increment row, decrement column
+- 6 to 9 o'clock: decrement row, decrement column
+- 9 to 12 o'clock: decrement row, increment column
+
+
+*Solution*
+
+- Take each sensor one at a time and work round the perimeter checking each cell just outside the sensor range (range+1).
+- For each of those cells check whether it is within the sensor range of every other sensor.
+  - If is within sensor range then discard and move on.
+  - If outwith the sensor range of every sensor then by definition it must be the cell we are looking for.
+- Once we've found the solution stop looking - otherwise we could be here for a while.
+- Calculate the answer using the x and y coordinate.
