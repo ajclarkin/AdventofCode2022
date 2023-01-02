@@ -13,6 +13,7 @@ def CompareLeftRight(l, r):
         else:
             right = r[k]
 
+        print(f'Compare {left} with {right}\t\t{type(left)} - {type(right)}')
 
         if type(left) == int and type(right) == list:
             temp = left
@@ -26,25 +27,34 @@ def CompareLeftRight(l, r):
 
         if type(left) == int and type(right) == int:
             if left < right:
+                print('Return True - int comparison')
                 return True
             elif right < left:
+                print('Return False - int comparison')
                 return False
 
 
         if type(left) == list and type(right) == list:
-            # Here there's a problem with the input but not the example. We have deeper nesting of lists.
-            # So, if we recurse into the function again it will handle it if the elements are ints but will loop deeper to unpack
-            # if nests of lists.
-
+            print(f"Call function again {left} ---- {right}")
             res = CompareLeftRight(left, right)
+            print(f"Nested function return {res}")
             if res == True or res == False:
                 return res
 
+            # for ll, rr in zip(left, right):
+            #     if ll < rr:
+            #         # print('Return True - int in list comparison')
+            #         return True
+            #     elif rr < ll:
+            #         # print('Return False - int in list comparison')
+            #         return False
+
             if len(left) < len(right):
+                # print('Return True - list length comparison')
                 return True
             elif len(right) < len(left):
+                # print('Return False - list length comparison')
                 return False
-                
     if (len(l) < len(r)):
         return True
 
