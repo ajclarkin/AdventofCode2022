@@ -1,6 +1,14 @@
-# Day 13 - Distress Signal
+# Day 13 - Distress Signal, part 2
 
-pairs = list(map(str.splitlines, open('input.txt').read().strip().split('\n\n')))
+lines = [x for x in open('input.txt').read().split('\n')]
+while lines.count(''):
+    lines.remove('')
+
+
+items = [eval(l) for l in lines]
+items.append([[2]])
+items.append([[6]])
+
 
 def CompareLeftRight(l, r):
     for k, left in enumerate(l):
@@ -13,7 +21,6 @@ def CompareLeftRight(l, r):
         else:
             right = r[k]
 
-        print(f'Compare {left} with {right}\t\t{type(left)} - {type(right)}')
 
         if type(left) == int and type(right) == list:
             temp = left
@@ -27,46 +34,39 @@ def CompareLeftRight(l, r):
 
         if type(left) == int and type(right) == int:
             if left < right:
-                print('Return True - int comparison')
                 return True
             elif right < left:
-                print('Return False - int comparison')
                 return False
 
 
         if type(left) == list and type(right) == list:
-            print(f"Call function again {left} ---- {right}")
             res = CompareLeftRight(left, right)
-            print(f"Nested function return {res}")
             if res == True or res == False:
                 return res
 
-            # for ll, rr in zip(left, right):
-            #     if ll < rr:
-            #         # print('Return True - int in list comparison')
-            #         return True
-            #     elif rr < ll:
-            #         # print('Return False - int in list comparison')
-            #         return False
-
             if len(left) < len(right):
-                # print('Return True - list length comparison')
                 return True
             elif len(right) < len(left):
-                # print('Return False - list length comparison')
                 return False
     if (len(l) < len(r)):
         return True
 
 
 
-pair_count = 0
-total = 0
-for l, r in pairs:
-    pair_count += 1
-    res = CompareLeftRight(eval(l), eval(r))
-    if res:
-        total += pair_count
-    print(res, l, r)
 
-print(f"The total you're looking for is {total}")
+
+made_change = True
+
+while made_change == True:
+    made_change = False
+    for k, v in enumerate(items):
+        if k+1 < len(items):
+            if not CompareLeftRight(v, items[k+1]):
+                temp = items.pop(k)
+                items.insert(k+1, temp)
+                made_change = True
+
+pos1 = items.index([[2]]) + 1
+pos2 = items.index([[6]]) + 1
+
+print(f"The decoder key is {pos1 * pos2}")
