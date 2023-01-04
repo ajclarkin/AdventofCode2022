@@ -61,7 +61,7 @@ I wondered if I could rotate these to make the geometry easier to work with but 
 - Even if in the corner of the grid it will be on the boundary of two sensors. Anywhere else it will bound more sensors.
 
 
-The means of finding the perimeter was pretty ugle but works - this is the `FindBoundary()` function. It keeps a note of the sensor coordinates c and r, and then the dc and dr to track the displacement from there. Start at 12 o'clock which is r minus (distance  + 1). Then work clockwise adjusting dc and dr accordingly. Then we put c and dc, r and dr together to get the actual coordinates.
+The means of finding the perimeter was pretty ugle but works - this is the `FindBoundary()` function. It keeps a note of the sensor coordinates c and r, and then the dc and dr to track the displacement from there. Start at 12 o'clock which is r minus (distance  + 1). Then work clockwise adjusting dc and dr accordingly. Then we put c and dc, r and dr together to get the actual coordinates.'
 
 - 12 to 3 o'clock: increment row, increment column
 - 3 to 6 o'clock: increment row, decrement column
